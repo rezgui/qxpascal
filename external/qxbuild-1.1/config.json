@@ -1,0 +1,278 @@
+{
+  "name": "qxbuild",
+
+  "let":
+  {
+    // ========================================================================
+    // [Paths - You must change these to match your filesystem]
+    // ========================================================================
+
+    // Qooxdoo instalation directory.
+    "QOOXDOO_PATH"      : "../qooxdoo-svn",
+
+    // Qooxdoo extended themes.
+    "QXET_PATH"         : "../qxet",
+
+    // If you want UploadWidget, put here correct path.
+    "UPLOADWIDGET_PATH" : "../qooxdoo-contrib-svn/UploadWidget/trunk",
+
+    // If you want HtmlArea, put here correct path.
+    "HTMLAREA_PATH"     : "../qooxdoo-contrib-svn/HtmlArea/0.3-pre",
+
+    // ========================================================================
+    // [Internal stuff, do not replace]
+    // ========================================================================
+
+    "APPLICATION"       : "qxbuild",
+
+    // ========================================================================
+    // [Theme]
+    // ========================================================================
+
+    "QXTHEME"           : "qx.theme.Modern",
+
+    // ========================================================================
+    // [Other]
+    // ========================================================================
+
+    "QXVERSION"         : "1.1",
+    "LOCALES"           : [ "en" ],
+    "ROOT"              : ".",
+    "BUILD_PATH"        : "qx",
+    "CACHE"             : "cache"
+  },
+
+  "include":
+  [
+    // ========================================================================
+    // [Environment Confirugation]
+    // ========================================================================
+    {
+      "path": "${QOOXDOO_PATH}/tool/data/config/application.json"
+    }
+  ],
+
+  "jobs":
+  {
+    // ========================================================================
+    // [qxcommon] - inherited by build and debug
+    // ========================================================================
+
+    "qxcommon":
+    {
+      // ----------------------------------------------------------------------
+      // [Library] - The final product
+      // ----------------------------------------------------------------------
+
+      "library":
+      [
+        // [Qooxdoo]
+        { "manifest": "${QOOXDOO_PATH}/framework/Manifest.json", "uri": "${QOOXDOO_URI}" }
+
+        // [Contributions, uncomment if you want them]
+
+        // [QxEt]
+        // ,
+        // { "manifest": "${QXET_PATH}/Manifest.json", "uri": "${QOOXDOO_URI}" }
+
+        // [UploadWidget]
+        // ,
+        // { "manifest": "${UPLOADWIDGET_PATH}/Manifest.json", "uri": "${QOOXDOO_URI}" }
+
+        // [HtmlArea]
+        // ,
+        // { "manifest": "${HTMLAREA_PATH}/Manifest.json", "uri": "${QOOXDOO_URI}" }
+      ],
+
+      // ----------------------------------------------------------------------
+      // [Library] - What include in build
+      // ----------------------------------------------------------------------
+
+      "include":
+      [
+        // [Qooxdoo]
+
+        "qx.Bootstrap", "qx.Class", "qx.Interface", "qx.Mixin", "qx.Theme",
+        "qx.application.*", "qx.bom.*", "qx.core.*", "qx.data.*", "qx.dom.*",
+        "qx.event.*", "qx.html.*", "qx.io.*", "qx.io2.*", "qx.lang.*", "qx.locale.*",
+        "qx.log.*", "qx.type.*", "qx.ui.*", "qx.util.*", "qx.xml.*"
+
+        // [Theme]
+        ,
+        "${QXTHEME}"
+
+        // [Contributions, uncomment if you want them]
+
+        // ,
+        // "qxet.*"
+
+        // ,
+        // "uploadwidget.*"
+
+        // ,
+        // "htmlarea.*"
+      ],
+
+      // ----------------------------------------------------------------------
+      // [Library] - What exclude in build
+      // ----------------------------------------------------------------------
+
+      // It's always good to exclude legacy and testing stuff
+      "exclude":
+      [
+        // Qooxdoo lagacy and testing classes
+        "qx.test.*"
+
+        // Themes
+        // ,"qx.theme.modern.*", "qx.theme.Modern"
+        // ,"qx.theme.classic.*", "qx.theme.Classic"
+
+        // Don't include applications in uploadwidget and htmlarea
+        // ,"uploadwidget.Application"
+        // ,"htmlarea.Application"
+      ],
+
+      // Where the build cache will be
+      "cache":
+      {
+        "compile": "${CACHE}"
+      },
+
+      // Settings in build file
+      "settings":
+      {
+        "qx.version": "${QXVERSION}"
+      }
+    },
+
+    // ========================================================================
+    // [qxbuild-debug] - Debug version
+    // ========================================================================
+
+    // Job to compile qooxdoo library with debugging informations
+    "qxbuild-debug":
+    {
+      "extend": ["qxcommon"],
+
+      "variants":
+      {
+        "qx.debug"     : ["on"],
+        "qx.aspects"   : ["on"],
+        "qx.dynlocale" : ["off"]
+      },
+
+      "compile":
+      {
+        "type": "build"
+      },
+
+      "compile-options":
+      {
+        "paths":
+        {
+          "file"     : "${BUILD_PATH}/script/qx-debug.js"
+        },
+
+        "uris":
+        {
+          "script"   : "/QOOXDOO_BUILD_PATH/script",
+          "resource" : "/QOOXDOO_BUILD_PATH/resource"
+        },
+
+        "code":
+        {
+          "format"   : true,
+          "locales"  : ["en"],
+          "optimize" : []
+        }
+      }
+    },
+
+    // ========================================================================
+    // [qxbuild-release] - Release version
+    // ========================================================================
+
+    // Job to compile optimized qooxdoo library
+    "qxbuild-release":
+    {
+      "extend": ["qxcommon"],
+
+      "variants":
+      {
+        "qx.debug"     : ["off"],
+        "qx.aspects"   : ["off"],
+        "qx.dynlocale" : ["off"]
+      },
+
+      "compile":
+      {
+        "type": "build"
+      },
+
+      "compile-options":
+      {
+        "paths":
+        {
+          "file"     : "${BUILD_PATH}/script/qx-release.js"
+        },
+
+        "uris":
+        {
+          "script"   : "/QOOXDOO_BUILD_PATH/script",
+          "resource" : "/QOOXDOO_BUILD_PATH/resource"
+        },
+
+        "code":
+        {
+          "format"   : false,
+          "locales"  : ["en"],
+          "optimize" : ["variables", "basecalls", "privates", "strings"]
+        }
+      }
+    },
+
+    // ========================================================================
+    // [qxbuild-resources] - resources
+    // ========================================================================
+
+    // Job to compile qooxdoo resources
+    "qxbuild-resources":
+    {
+      "extend": ["qxcommon"],
+
+      "copy-resources":
+      {
+        "target"          : "${BUILD_PATH}",
+        "resource-filter" : true
+      }
+    },
+
+    // ========================================================================
+    // [qxbuild-fix] - fix generated files to match qxbuild demands
+    // ========================================================================
+
+    "qxbuild-fix":
+    {
+      "shell":
+      {
+        "command": "./fix.py"
+      }
+    },
+
+    // ========================================================================
+    // [compile-qx] - compile all (called from command line)
+    // ========================================================================
+
+    // Job to compile all (resources, debug and build)
+    "compile-qx":
+    {
+      "run":
+      [
+        "qxbuild-resources",
+        "qxbuild-debug",
+        "qxbuild-release",
+        "qxbuild-fix"
+      ]
+    }
+  }
+}

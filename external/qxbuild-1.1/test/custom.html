@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<!-- HEAD section -->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Custom test</title>
+  <!-- Qooxdoo Loader -->
+  <script type="text/javascript" src="../qx/script/qx-loader.js"></script>
+</head>
+
+<!-- SCRIPT section -->
+<body>
+<script type="text/javascript">
+
+// [Settings]
+qxsettings = {};
+
+// [Qooxdoo Mode - "debug" or "release"]
+qxsettings["qx.mode"] = "debug";
+
+// [Qooxdoo Theme]
+qxsettings["qx.theme"] = "qx.theme.Modern";
+
+// [Qooxdoo Path]
+qxsettings["qx.path"] = "../qx";
+
+// [Application entry point]
+qxsettings["qx.application"] = "custom.Application";
+
+// [Javascript Files]
+//
+// Here are javascripts files that will be loaded by qx-loader. First file
+// must be qooxdoo main module. All next files are your javascript files.
+qxscripts =
+[
+  // Qooxdoo
+  qxsettings["qx.path"] + "/script/qx-" + qxsettings["qx.mode"] + ".js",
+
+  // Add here your scripts to load, you can use qxsettings[] for base paths, etc...
+  "./custom.js"
+];
+
+// [Qooxdoo Loader]
+(function() { qxloader.run({scripts: qxscripts}); }());
+</script>
+</body>
+
+</html>

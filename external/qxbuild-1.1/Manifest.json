@@ -1,0 +1,33 @@
+{
+  "info" :
+  {
+    "name" : "qxbuild",
+
+    "summary" : "qxbuild - qooxdoo all-in-one package",
+    "description" : "This is a skeleton for a complete qooxdoo build.",
+
+    "homepage" : "http://code.google.com/p/qxbuild/",
+
+    "license" : "MIT",
+    "authors" :
+    [
+      {
+        "name" : "Petr Kobalicek",
+        "email" : "kobalicek.petr@gmail.com"
+      }
+    ],
+
+    "version" : "trunk",
+    "qooxdoo-versions": ["1.1", "trunk"]
+  },
+
+  "provides" :
+  {
+    "namespace"   : "",
+    "encoding"    : "utf-8",
+    "class"       : "source/class",
+    "resource"    : "source/resource",
+    "translation" : "source/translation",
+    "type"        : "library"
+  }
+}
