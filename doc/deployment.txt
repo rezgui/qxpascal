@@ -1,0 +1,12 @@
+DEPLOYMENT STEPS
+----------------
+
+1. Copy folder "qx" folder from <local_svn_copy>/external/qxbuild-1.1/qx into <www_root> folder of your web sever i.e. "htdocs" on Apache.
+
+2. Copy your application binary into <cgi-bin> folder of your web server i.e. "cgi-bin" on Apache.
+
+3. If necessary, copy your application config file into <cgi-bin> folder of your web server.
+
+4. If you are using CGI proxy, copy CGI proxy binary into <cgi-bin> folder of your web server.
+
+5. If you are using FCGI mechanism, setup your web server configuration accordingly, if required.
