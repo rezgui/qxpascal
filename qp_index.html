@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>qxPascal HTML template</title>
+<script type="text/javascript" src="qx/script/qx-loader.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+qxsettings = {};
+qxsettings["qx.path"] = "qx";
+qxsettings["qx.mode"] = "release";
+qxsettings["qx.theme"] = "qx.theme.Modern";
+qxsettings["qx.application"] = "qxPascal.Application";
+qxscripts = [qxsettings["qx.path"] + "/script/qx-" + qxsettings["qx.mode"] + ".js"];
+(function() { 
+	qxloader.run({scripts:qxscripts});
+	qxloader.finish = function() {
+		qx.Class.define("qxPascal.Application", {
+			extend: qx.application.Standalone,
+			members: {
+			  // -- custom function goes here
+			  showLabel: function(aParent, aText, aLeft, aTop) {
+			    aParent.add(new qx.ui.basic.Label(aText), {left: aLeft, top: aTop});
+			  },
+			  // --
+				main: function() {
+					this.base(arguments);
+					// -- main app function goes here
+					var container = new qx.ui.container.Composite();
+					container.setLayout(new qx.ui.layout.Canvas());
+					container.setDecorator("main");
+
+					var win = new qx.ui.window.Window("Window", null);
+					win.setLayout(new qx.ui.layout.Canvas());
+					win.setAllowMaximize(false);
+					win.setWidth(300);
+					win.setHeight(200);
+
+					container.add(win, {left: 10, top: 10});
+					this.showLabel(win, "Hello world from qxPascal!", 5, 5); 
+					this.getRoot().add(container, {edge: 5});
+					
+					win.open();
+					// --
+				}
+			}
+		});
+	};
+}());
+</script>
+<noscript>JavaScript error: This web application requires JavaScript enabled.</noscript>
+</body>
+</html>
