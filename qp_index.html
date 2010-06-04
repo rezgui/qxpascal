@@ -19,13 +19,14 @@ qxscripts = [qxsettings["qx.path"] + "/script/qx-" + qxsettings["qx.mode"] + ".j
 		qx.Class.define("qxPascal.Application", {
 			extend: qx.application.Standalone,
 			members: {
-			  // -- custom function goes here
-			  showLabel: function(aParent, aText, aLeft, aTop) {
-			    aParent.add(new qx.ui.basic.Label(aText), {left: aLeft, top: aTop});
-			  },
-			  // --
+				// -- custom function goes here
+				showLabel: function(aParent, aText, aLeft, aTop) {
+					aParent.add(new qx.ui.basic.Label(aText), {left: aLeft, top: aTop});
+				},
+				// --
 				main: function() {
 					this.base(arguments);
+
 					// -- main app function goes here
 					var container = new qx.ui.container.Composite();
 					container.setLayout(new qx.ui.layout.Canvas());
