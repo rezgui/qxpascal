@@ -13,9 +13,9 @@ qxsettings["qx.mode"] = "release";
 qxsettings["qx.theme"] = "qx.theme.Modern";
 qxsettings["qx.application"] = "qxPascal.Application";
 qxscripts = [qxsettings["qx.path"] + "/script/qx-" + qxsettings["qx.mode"] + ".js"];
-(function() { 
-	qxloader.run({scripts:qxscripts});
-	qxloader.finish = function() {
+qxloader.run({
+	scripts: qxscripts,
+	finish: function() {
 		qx.Class.define("qxPascal.Application", {
 			extend: qx.application.Standalone,
 			members: {
@@ -41,14 +41,14 @@ qxscripts = [qxsettings["qx.path"] + "/script/qx-" + qxsettings["qx.mode"] + ".j
 					container.add(win, {left: 10, top: 10});
 					this.showLabel(win, "Hello world from qxPascal!", 5, 5); 
 					this.getRoot().add(container, {edge: 5});
-					
+
 					win.open();
 					// --
 				}
 			}
-		});
-	};
-}());
+		})
+	}
+});
 </script>
 <noscript>JavaScript error: This web application requires JavaScript enabled.</noscript>
 </body>
