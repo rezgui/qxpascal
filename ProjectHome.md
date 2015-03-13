@@ -1,0 +1,5 @@
+Inspired by [ExtPascal](http://extpascal.googlecode.com/) project, we're trying to create a similar project for Qooxdoo framework. This project will be using [FreePascal](http://www.freepascal.org) (FPC) compiler and Lazarus IDE, utilizing FPC's fpWeb framework as the backend/remote engine. Compatibilty with Delphi is planned but not become a priority.
+
+Wrappers for other useful JS libraries such as [Raphaël](http://raphaeljs.com/) (vector drawing) or [CodeMirror](http://marijn.haverbeke.nl/codemirror/) (code editor) is also planned for future releases. Our long term goal is to create a complete RAD **web** IDE (Delphi/Lazarus-like) for rich internet application development using object Pascal.
+
+[qxPascal](http://qxpascal.googlecode.com/) was initiated by [Indonesian Delphi/Pascal Developer Community](http://www.delphi-id.tk/).
